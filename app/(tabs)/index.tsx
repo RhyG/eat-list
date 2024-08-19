@@ -19,7 +19,17 @@ export default function TabOneScreen() {
         {markers.map((marker, index) => (
           <Marker key={`${marker.name}-${index}`} coordinate={marker.latLng} title={marker.name} />
         ))}
+        <OverlayComponent />
       </MapView>
+    </View>
+  );
+}
+
+function OverlayComponent() {
+  return (
+    <View style={{ backgroundColor: "white", padding: 10, borderRadius: 5, position: "absolute", bottom: 50 }}>
+      <Text style={{ fontWeight: "bold" }}>Overlay Component</Text>
+      <Text>This is an overlay component.</Text>
     </View>
   );
 }
