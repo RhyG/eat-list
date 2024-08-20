@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import EditScreenInfo from "@/components/EditScreenInfo";
 import { Text, View } from "@/components/Themed";
 
 import { places } from "@/constants/places";
