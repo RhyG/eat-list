@@ -9,7 +9,13 @@ import { Link } from "expo-router";
 export default function TabTwoScreen() {
   const renderItem: ListRenderItem<(typeof places)[number]> = ({ item }) => {
     return (
-      <Link style={styles.item} href={{ pathname: "/places/[place]", params: { ...item } }}>
+      <Link
+        style={styles.item}
+        href={{
+          pathname: "/places/[place]",
+          params: { name: item.name, latitude: item.latLng.latitude, longitude: item.latLng.longitude },
+        }}
+      >
         <Text>{item.name}</Text>
       </Link>
     );
