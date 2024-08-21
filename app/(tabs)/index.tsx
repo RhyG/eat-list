@@ -20,8 +20,10 @@ export default function TabOneScreen() {
 function OverlayComponent() {
   return (
     <View style={{ backgroundColor: "white", padding: 10, borderRadius: 5, position: "absolute", bottom: 50 }}>
-      <Text style={{ fontWeight: "bold" }}>Overlay Component</Text>
-      <Text>This is an overlay component.</Text>
+      <View>
+        <Text style={{ fontWeight: "bold" }}>Overlay Component</Text>
+        <Text>This is an overlay component.</Text>
+      </View>
     </View>
   );
 }
