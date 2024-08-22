@@ -1,7 +1,7 @@
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { Text, View } from "@/components/Themed";
 import { useLayoutEffect, useState } from "react";
-import { Pressable } from "react-native";
+import { Pressable, TextInput } from "react-native";
 
 export default function ItemDetail() {
   const { name, latitude, longitude } = useLocalSearchParams<{ name: string; latitude: string; longitude: string }>();
@@ -18,10 +18,17 @@ export default function ItemDetail() {
   });
 
   return (
-    <View style={{ flex: 1, alignItems: "center", paddingHorizontal: 20 }}>
-      <Text style={{ fontWeight: "bold", fontSize: 22 }}>{name}</Text>
-      <Text style={{ fontSize: 16, color: "#626268" }}>123 Main St, Brisbane QLD</Text>
+    <View style={{ flex: 1, alignItems: "center", paddingHorizontal: 20, gap: 20, paddingTop: 20 }}>
+      <View>
+        <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 22 }} numberOfLines={2}>
+          {name}
+        </Text>
+        <Text style={{ textAlign: "center", fontSize: 16, color: "#626268" }} numberOfLines={2}>
+          123 Main St, Brisbane QLD
+        </Text>
+      </View>
       <Ratings />
+      <Comments />
     </View>
   );
 }
@@ -69,5 +76,19 @@ function Rating({
     >
       <Text style={{ fontWeight: "bold", fontSize: 16, color: selected ? "white" : "#18181a" }}>{index}</Text>
     </Pressable>
+  );
+}
+
+function Comments() {
+  return (
+    <View style={{ width: "80%" }}>
+      <Text style={{ fontWeight: "500", marginBottom: 10 }}>Comments</Text>
+      <TextInput
+        multiline
+        textAlignVertical="top"
+        style={{ borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, height: 200 }}
+        numberOfLines={20}
+      />
+    </View>
   );
 }
