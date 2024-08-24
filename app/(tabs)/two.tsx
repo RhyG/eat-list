@@ -5,7 +5,9 @@ import { Text, View } from "@/components/Themed";
 
 import { places } from "@/constants/places";
 import { Link, useNavigation } from "expo-router";
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useMemo, useState } from "react";
+
+type Filter = "visited" | "not-visited" | "all";
 
 export default function TabTwoScreen() {
   const navigation = useNavigation();
@@ -16,6 +18,15 @@ export default function TabTwoScreen() {
       headerTransparent: true,
     });
   });
+
+  const [filter, setFilter] = useState<Filter>("all");
+
+  const filteredList = useMemo(() => {
+    if (filter === "all") {
+      return places;
+    }
+    return places.filter((place) => (filter === "visited" ? place.visited : !place.visited));
+  }, [filter]);
 
   const renderItem: ListRenderItem<(typeof places)[number]> = ({ item }) => {
     return (
@@ -47,7 +58,37 @@ export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
       <Text style={{ fontWeight: "bold", fontSize: 22 }}>All Places</Text>
-      <FlatList data={places} renderItem={renderItem} contentContainerStyle={{ gap: 8, paddingTop: 10 }} />
+      <FlatList
+        data={filteredList}
+        renderItem={renderItem}
+        contentContainerStyle={{ gap: 8, paddingTop: 10 }}
+        ListHeaderComponent={<FilterHeader setFilter={setFilter} currentFilter={filter} />}
+      />
+    </View>
+  );
+}
+
+function FilterHeader({ setFilter, currentFilter }: { setFilter: (filter: Filter) => void; currentFilter: Filter }) {
+  return (
+    <View style={{ flexDirection: "row", paddingBottom: 10, backgroundColor: "transparent", gap: 10 }}>
+      <Pressable
+        onPress={() => setFilter("all")}
+        style={[styles.filterButton, { backgroundColor: currentFilter === "all" ? "#3983f7" : "white" }]}
+      >
+        <Text style={{ color: currentFilter === "all" ? "white" : "black" }}>All</Text>
+      </Pressable>
+      <Pressable
+        onPress={() => setFilter("visited")}
+        style={[styles.filterButton, { backgroundColor: currentFilter === "visited" ? "#3983f7" : "white" }]}
+      >
+        <Text style={{ color: currentFilter === "visited" ? "white" : "black" }}>Visited</Text>
+      </Pressable>
+      <Pressable
+        onPress={() => setFilter("not-visited")}
+        style={[styles.filterButton, { backgroundColor: currentFilter === "not-visited" ? "#3983f7" : "white" }]}
+      >
+        <Text style={{ color: currentFilter === "not-visited" ? "white" : "black" }}>Not Visited</Text>
+      </Pressable>
     </View>
   );
 }
@@ -62,7 +103,7 @@ function Rating({ rating }: { rating: number }) {
         backgroundColor: "#fdf9c2",
         paddingHorizontal: 8,
         paddingVertical: 5,
-        borderRadius: 112,
+        borderRadius: 12,
       }}
     >
       <Feather name="star" size={14} color="#eab208" />
@@ -86,5 +127,11 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     borderRadius: 8,
+  },
+  filterButton: {
+    borderRadius: 20,
+    backgroundColor: "white",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
   },
 });
