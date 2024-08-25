@@ -22,10 +22,16 @@ export default function TabTwoScreen() {
   const [filter, setFilter] = useState<Filter>("all");
 
   const filteredList = useMemo(() => {
+    const sorted = places.sort((a, b) => {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      return 0;
+    });
+
     if (filter === "all") {
-      return places;
+      return sorted;
     }
-    return places.filter((place) => (filter === "visited" ? place.visited : !place.visited));
+    return sorted.filter((place) => (filter === "visited" ? place.visited : !place.visited));
   }, [filter]);
 
   const renderItem: ListRenderItem<(typeof places)[number]> = ({ item }) => {
@@ -57,11 +63,11 @@ export default function TabTwoScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontWeight: "bold", fontSize: 22 }}>All Places</Text>
+      <Text style={{ fontWeight: "bold", fontSize: 22, paddingBottom: 10 }}>All Places</Text>
       <FlatList
         data={filteredList}
         renderItem={renderItem}
-        contentContainerStyle={{ gap: 8, paddingTop: 10 }}
+        contentContainerStyle={{ gap: 8 }}
         ListHeaderComponent={<FilterHeader setFilter={setFilter} currentFilter={filter} />}
       />
     </View>
