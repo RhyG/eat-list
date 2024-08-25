@@ -18,7 +18,7 @@ export default function ItemDetail() {
     });
   });
 
-  const [visited, setVisited] = useState(false);
+  const [visited, setVisited] = useState(_visited === "true" ? true : false);
 
   function handleSetVisitedPressed(visited: boolean) {
     setVisited(visited);
