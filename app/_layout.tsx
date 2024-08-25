@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/components/useColorScheme";
+import { Storage } from "@/modules/storage";
+import { places } from "@/constants/places";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -20,6 +22,21 @@ export const unstable_settings = {
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+
+(function () {
+  // places.forEach((place) => {
+  //   const storedPlaces = Storage.getItem<typeof places>("places") || {};
+  //   if (!storedPlaces[place.id]) {
+  //     storedPlaces[place.id] = {
+  //       ...place,
+  //       visited: false,
+  //       rating: null,
+  //     };
+  //   }
+  // console.log(storedPlaces);
+  // Storage.setItem("places", storedPlaces);
+  // });
+})();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
