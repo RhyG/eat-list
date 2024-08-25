@@ -6,8 +6,11 @@ import { Text, View } from "@/components/Themed";
 import { places } from "@/constants/places";
 import { Link, useNavigation } from "expo-router";
 import { useLayoutEffect, useMemo, useState } from "react";
+import { Storage } from "@/modules/storage";
 
 type Filter = "visited" | "not-visited" | "all";
+
+const storedPlaces = Storage.getItem<typeof places>("places") || {};
 
 export default function TabTwoScreen() {
   const navigation = useNavigation();
@@ -22,6 +25,7 @@ export default function TabTwoScreen() {
   const [filter, setFilter] = useState<Filter>("all");
 
   const filteredList = useMemo(() => {
+    const places = Object.keys(storedPlaces).map((key) => storedPlaces[key]);
     const sorted = places.sort((a, b) => {
       if (a.name < b.name) return -1;
       if (a.name > b.name) return 1;
@@ -39,7 +43,7 @@ export default function TabTwoScreen() {
       <Link
         href={{
           pathname: "/places/[place]",
-          params: { name: item.name, latitude: item.latLng.latitude, longitude: item.latLng.longitude },
+          params: { name: item.name, visited: String(item.visited), id: item.id },
         }}
       >
         <View style={styles.item}>
@@ -53,7 +57,7 @@ export default function TabTwoScreen() {
             </View>
           </View>
           <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-            <View>{item.visited ? <Rating rating={item.rating} /> : null}</View>
+            <View>{item.rating ? <Rating rating={item.rating} /> : null}</View>
             <View>{item.visited ? <Feather name="check-circle" size={22} color="#22c55e" /> : null}</View>
           </View>
         </View>

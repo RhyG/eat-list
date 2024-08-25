@@ -3,9 +3,10 @@ import { Text, View } from "@/components/Themed";
 import { useLayoutEffect, useState } from "react";
 import { Pressable, TextInput } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
+import { Storage } from "@/modules/storage";
 
 export default function ItemDetail() {
-  const { name } = useLocalSearchParams<{ name: string; latitude: string; longitude: string }>();
+  const { name, id, visited: _visited } = useLocalSearchParams<{ name: string; id: string; visited: string }>();
 
   const navigation = useNavigation();
 
@@ -19,6 +20,19 @@ export default function ItemDetail() {
 
   const [visited, setVisited] = useState(false);
 
+  function handleSetVisitedPressed(visited: boolean) {
+    setVisited(visited);
+
+    if (!id) return;
+
+    const storedPlaces =
+      Storage.getItem<Record<string, { name: string; id: string; visited: boolean; rating: number }>>("places") || {};
+
+    storedPlaces[id].visited = visited;
+
+    Storage.setItem("places", storedPlaces);
+  }
+
   return (
     <View style={{ flex: 1, alignItems: "center", paddingHorizontal: 50, gap: 30, paddingTop: 40 }}>
       <View>
@@ -29,10 +43,10 @@ export default function ItemDetail() {
           123 Main St, Brisbane QLD
         </Text>
       </View>
-      <VisitedButtons setVisited={setVisited} visited={visited} />
+      <VisitedButtons setVisited={handleSetVisitedPressed} visited={visited} />
       {visited ? (
         <>
-          <Ratings />
+          <Ratings id={id!} />
           <Comments />
         </>
       ) : null}
@@ -86,23 +100,34 @@ function VisitedButtons({ setVisited, visited }: { setVisited: (visited: boolean
   );
 }
 
-function Ratings() {
+function Ratings({ id }: { id: string }) {
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
 
   const firstRatings = [1, 2, 3, 4, 5];
   const secondRatings = [6, 7, 8, 9, 10];
+
+  function handleRatingPressed(rating: number) {
+    setSelectedRating(rating);
+
+    const storedPlaces =
+      Storage.getItem<Record<string, { name: string; id: string; visited: boolean; rating: number }>>("places") || {};
+
+    storedPlaces[id].rating = rating;
+
+    Storage.setItem("places", storedPlaces);
+  }
 
   return (
     <View>
       <Text style={{ fontWeight: "500", marginBottom: 10 }}>Your Rating</Text>
       <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
         {firstRatings.map((i) => (
-          <Rating key={i} index={i} selected={selectedRating === i} setSelected={setSelectedRating} />
+          <Rating key={i} index={i} selected={selectedRating === i} setSelected={handleRatingPressed} />
         ))}
       </View>
       <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%", marginTop: 10 }}>
         {secondRatings.map((i) => (
-          <Rating key={i} index={i} selected={selectedRating === i} setSelected={setSelectedRating} />
+          <Rating key={i} index={i} selected={selectedRating === i} setSelected={handleRatingPressed} />
         ))}
       </View>
     </View>
