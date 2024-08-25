@@ -1,5 +1,6 @@
 export const places = [
   {
+    id: "f52e6c74-4c09-4e29-8bc5-f70b2d7a6f9d",
     name: "The Spicy Spoon",
     address: "123 Hot Sauce Ave, Sydney, NSW",
     latLng: { latitude: -33.8688, longitude: 151.2093 },
@@ -7,6 +8,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "a81c9452-4173-4ccf-bfa0-9ff705ecb290",
     name: "Bistro Bella",
     address: "456 Olive St, Melbourne, VIC",
     latLng: { latitude: -37.8136, longitude: 144.9631 },
@@ -14,6 +16,7 @@ export const places = [
     visited: false,
   },
   {
+    id: "7a3df15b-993e-42a7-9a76-304d2f8cbcc6",
     name: "The Rustic Table",
     address: "789 Country Rd, Perth, WA",
     latLng: { latitude: -31.9505, longitude: 115.8605 },
@@ -21,13 +24,15 @@ export const places = [
     visited: true,
   },
   {
+    id: "d54a6d5c-810e-4827-844d-14908c0b1e6b",
     name: "Urban Eats",
     address: "321 Market Ln, Adelaide, SA",
     latLng: { latitude: -34.9285, longitude: 138.6007 },
-    rating: 6,
+    rating: null,
     visited: false,
   },
   {
+    id: "fe1d4eae-39e4-4c8e-bf38-3fe50096f1ef",
     name: "Seaside Grill",
     address: "654 Ocean Blvd, Gold Coast, QLD",
     latLng: { latitude: -28.0167, longitude: 153.4 },
@@ -35,6 +40,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "25799d4e-42b7-482d-97e4-dae9e60536b3",
     name: "Mountain View Cafe",
     address: "987 Alpine Dr, Hobart, TAS",
     latLng: { latitude: -42.8821, longitude: 147.3272 },
@@ -42,6 +48,7 @@ export const places = [
     visited: false,
   },
   {
+    id: "a3e76cde-0b24-4380-867a-4f79241d9e54",
     name: "Sunset Diner",
     address: "246 Sunset Blvd, Canberra, ACT",
     latLng: { latitude: -35.2809, longitude: 149.13 },
@@ -49,6 +56,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "56fddf80-18a6-4a4e-b843-3850de1735fa",
     name: "The Green Garden",
     address: "135 Nature St, Darwin, NT",
     latLng: { latitude: -12.4634, longitude: 130.8456 },
@@ -56,6 +64,7 @@ export const places = [
     visited: false,
   },
   {
+    id: "68e14936-e791-42a7-a924-e07b29ae02e4",
     name: "City Lights Bar & Grill",
     address: "753 Downtown Ave, Brisbane, QLD",
     latLng: { latitude: -27.4698, longitude: 153.0251 },
@@ -63,6 +72,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "1e8cbe30-6d9c-4c4f-bcd2-d7f84a1a4784",
     name: "Harbour View Restaurant",
     address: "159 Dockside Rd, Sydney, NSW",
     latLng: { latitude: -33.8548, longitude: 151.2165 },
@@ -70,6 +80,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "ea2d741f-d8d0-499b-b163-8e2797bb7a4f",
     name: "The Steak House",
     address: "951 Carnivore Ln, Geelong, VIC",
     latLng: { latitude: -38.1499, longitude: 144.3617 },
@@ -77,6 +88,7 @@ export const places = [
     visited: false,
   },
   {
+    id: "ba4c64f8-e876-4dbd-b26e-301b01a89163",
     name: "Pizza Palace",
     address: "357 Slice St, Perth, WA",
     latLng: { latitude: -31.9486, longitude: 115.8575 },
@@ -84,6 +96,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "923f69ec-8166-42c1-8b45-89b8a7077b77",
     name: "Curry Corner",
     address: "258 Spice Ave, Adelaide, SA",
     latLng: { latitude: -34.9279, longitude: 138.5987 },
@@ -91,6 +104,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "c6182b3e-1927-4622-83c3-232a3ef4f5b7",
     name: "The Fish Market",
     address: "469 Sea Ln, Gold Coast, QLD",
     latLng: { latitude: -28.0017, longitude: 153.398 },
@@ -98,6 +112,7 @@ export const places = [
     visited: false,
   },
   {
+    id: "65f1c49e-44e8-49a7-ae77-d28b4a8cb21e",
     name: "Noodle House",
     address: "741 Asian Way, Sydney, NSW",
     latLng: { latitude: -33.865, longitude: 151.2094 },
@@ -105,6 +120,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "c1207e7b-68bc-421e-b66a-fc9b79a1ec36",
     name: "Burger Barn",
     address: "852 Patty Rd, Darwin, NT",
     latLng: { latitude: -12.4624, longitude: 130.8416 },
@@ -112,6 +128,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "4edc0c2d-995e-4b8a-bff8-cfbcb8392440",
     name: "Vegan Vibes",
     address: "369 Plant St, Melbourne, VIC",
     latLng: { latitude: -37.814, longitude: 144.9633 },
@@ -119,6 +136,7 @@ export const places = [
     visited: false,
   },
   {
+    id: "44218d0d-87af-4269-82fc-0566c961bcff",
     name: "The Smokehouse",
     address: "963 Grill Ave, Brisbane, QLD",
     latLng: { latitude: -27.4668, longitude: 153.0211 },
@@ -126,6 +144,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "75275944-bae8-4f95-b36d-e605a51fc110",
     name: "Ocean Breeze Cafe",
     address: "147 Shoreline Dr, Cairns, QLD",
     latLng: { latitude: -16.9186, longitude: 145.7781 },
@@ -133,6 +152,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "0f8c06fc-b91d-4c98-8b0f-c47c9a5e22a8",
     name: "Taco Town",
     address: "258 Fiesta Ln, Newcastle, NSW",
     latLng: { latitude: -32.9283, longitude: 151.7817 },
@@ -140,6 +160,7 @@ export const places = [
     visited: false,
   },
   {
+    id: "264c4c44-c3bc-498d-883a-e9d4f20fc847",
     name: "The Pasta Place",
     address: "369 Noodle St, Perth, WA",
     latLng: { latitude: -31.9466, longitude: 115.8555 },
@@ -147,6 +168,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "70e1f8d2-9c3b-401f-a5db-64fd4b0e2a14",
     name: "The Dessert Den",
     address: "951 Sweet St, Adelaide, SA",
     latLng: { latitude: -34.9259, longitude: 138.5967 },
@@ -154,6 +176,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "a22968d8-f434-4e9b-94b6-0d8f1c9e23b8",
     name: "Tapas & More",
     address: "753 Tapas Blvd, Sydney, NSW",
     latLng: { latitude: -33.8682, longitude: 151.2097 },
@@ -161,6 +184,7 @@ export const places = [
     visited: false,
   },
   {
+    id: "a9e72aeb-5a4a-4e64-9e34-c20ff5b202a7",
     name: "Sushi Station",
     address: "159 Wasabi Way, Melbourne, VIC",
     latLng: { latitude: -37.8142, longitude: 144.9634 },
@@ -168,6 +192,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "e9a81ba7-7765-420d-a16e-95cdebe7b703",
     name: "Barbecue Barn",
     address: "246 Grill Rd, Hobart, TAS",
     latLng: { latitude: -42.8806, longitude: 147.3248 },
@@ -175,6 +200,7 @@ export const places = [
     visited: false,
   },
   {
+    id: "64d276f5-1c35-4537-8452-934d03162f32",
     name: "Mediterranean Magic",
     address: "135 Olive Rd, Sydney, NSW",
     latLng: { latitude: -33.9195, longitude: 151.2336 },
@@ -182,6 +208,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "7ef92dbb-9a4d-4fe4-876b-cc7cf82a6f7f",
     name: "Breakfast Bliss",
     address: "753 Egg St, Brisbane, QLD",
     latLng: { latitude: -27.4689, longitude: 153.0255 },
@@ -189,6 +216,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "c23e8692-77a4-4905-8e23-82f1458d7971",
     name: "The Cozy Cafe",
     address: "357 Warm St, Sydney, NSW",
     latLng: { latitude: -33.847, longitude: 151.2115 },
@@ -196,6 +224,7 @@ export const places = [
     visited: false,
   },
   {
+    id: "b0421765-99bc-421e-bc75-33c02c5a2fc4",
     name: "Bistro 360",
     address: "852 Spin Ln, Canberra, ACT",
     latLng: { latitude: -35.2803, longitude: 149.131 },
@@ -203,6 +232,7 @@ export const places = [
     visited: true,
   },
   {
+    id: "f9d20ae2-9b4e-4916-97e8-c08b79f9e4c4",
     name: "Taste of Thai",
     address: "147 Curry Ln, Darwin, NT",
     latLng: { latitude: -12.4636, longitude: 130.8428 },
