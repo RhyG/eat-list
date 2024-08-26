@@ -3,6 +3,7 @@ import MapView, { Marker } from "react-native-maps";
 import { Text, View } from "@/components/Themed";
 
 import { places } from "@/constants/places";
+import { PlaceAutoCompleteInput } from "@/components/PlaceAutoCompleteInput";
 
 export default function TabOneScreen() {
   return (
@@ -19,11 +20,8 @@ export default function TabOneScreen() {
 
 function OverlayComponent() {
   return (
-    <View style={{ backgroundColor: "white", padding: 10, borderRadius: 5, position: "absolute", bottom: 50 }}>
-      <View>
-        <Text style={{ fontWeight: "bold" }}>Overlay Component</Text>
-        <Text>This is an overlay component.</Text>
-      </View>
+    <View style={{ backgroundColor: "white", borderRadius: 5, position: "absolute", top: 20, width: "80%" }}>
+      <PlaceAutoCompleteInput />
     </View>
   );
 }
