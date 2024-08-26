@@ -3,7 +3,7 @@ import { Text, View } from "@/components/Themed";
 import { useLayoutEffect, useState } from "react";
 import { Pressable, TextInput } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
-import { Storage } from "@/modules/storage";
+import { usePlacesContext } from "@/providers/PlacesProvider";
 
 export default function ItemDetail() {
   const { name, id, visited: _visited } = useLocalSearchParams<{ name: string; id: string; visited: string }>();
@@ -18,6 +18,8 @@ export default function ItemDetail() {
     });
   });
 
+  const { updatePlace, places } = usePlacesContext();
+
   const [visited, setVisited] = useState(_visited === "true" ? true : false);
 
   function handleSetVisitedPressed(visited: boolean) {
@@ -25,12 +27,13 @@ export default function ItemDetail() {
 
     if (!id) return;
 
-    const storedPlaces =
-      Storage.getItem<Record<string, { name: string; id: string; visited: boolean; rating: number }>>("places") || {};
+    const selectedPlace = places[id];
 
-    storedPlaces[id].visited = visited;
+    const rating = visited ? selectedPlace.rating : null;
 
-    Storage.setItem("places", storedPlaces);
+    const updatedPlace = { ...selectedPlace, visited, rating };
+
+    updatePlace(id, updatedPlace);
   }
 
   return (
@@ -100,21 +103,22 @@ function VisitedButtons({ setVisited, visited }: { setVisited: (visited: boolean
   );
 }
 
+const firstRatings = [1, 2, 3, 4, 5];
+const secondRatings = [6, 7, 8, 9, 10];
+
 function Ratings({ id }: { id: string }) {
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
 
-  const firstRatings = [1, 2, 3, 4, 5];
-  const secondRatings = [6, 7, 8, 9, 10];
+  const { updatePlace, places } = usePlacesContext();
 
   function handleRatingPressed(rating: number) {
     setSelectedRating(rating);
 
-    const storedPlaces =
-      Storage.getItem<Record<string, { name: string; id: string; visited: boolean; rating: number }>>("places") || {};
+    if (!id) return;
 
-    storedPlaces[id].rating = rating;
+    const updatedPlace = { ...places[id], rating };
 
-    Storage.setItem("places", storedPlaces);
+    updatePlace(id, updatedPlace);
   }
 
   return (
@@ -170,7 +174,7 @@ function Comments() {
       <TextInput
         multiline
         textAlignVertical="top"
-        style={{ borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, height: 200 }}
+        style={{ borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, height: 160 }}
         numberOfLines={20}
         placeholder="Write a comment..."
       />

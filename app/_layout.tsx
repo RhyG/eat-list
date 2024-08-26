@@ -9,6 +9,7 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/components/useColorScheme";
 import { Storage } from "@/modules/storage";
 import { places } from "@/constants/places";
+import { PlacesProvider } from "@/providers/PlacesProvider";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -33,8 +34,7 @@ SplashScreen.preventAutoHideAsync();
   //       rating: null,
   //     };
   //   }
-  // console.log(storedPlaces);
-  // Storage.setItem("places", storedPlaces);
+  //   Storage.setItem("places", storedPlaces);
   // });
 })();
 
@@ -67,9 +67,11 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
+      <PlacesProvider>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
+      </PlacesProvider>
     </ThemeProvider>
   );
 }
