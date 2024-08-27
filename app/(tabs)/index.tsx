@@ -18,10 +18,13 @@ export default function TabOneScreen() {
 
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} region={region}>
-        {places.map((marker, index) => (
-          <Marker key={`${marker.name}-${index}`} coordinate={marker.latLng} title={marker.name} />
-        ))}
+      <MapView style={styles.map} region={region} initialRegion={defaultRegion}>
+        <>
+          {places.map((marker, index) => (
+            <Marker key={`${marker.name}-${index}`} coordinate={marker.latLng} title={marker.name} />
+          ))}
+          <Marker coordinate={region} title="Melbourne" />
+        </>
         <OverlayComponent setRegion={setRegion} />
       </MapView>
     </View>
