@@ -1,14 +1,14 @@
 import React from "react";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { GooglePlaceDetail, GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
-export const PlaceAutoCompleteInput = () => {
+export const PlaceAutoCompleteInput = ({ placeSelected }: { placeSelected: (detail: GooglePlaceDetail) => void }) => {
   return (
     <GooglePlacesAutocomplete
       placeholder="Search"
-      onPress={(data, details = null) => {
-        // 'details' is provided when fetchDetails = true
-        // console.log(JSON.stringify({ data, details }));
-        console.log(details?.geometry.location);
+      onPress={(_, details = null) => {
+        if (!details) return;
+
+        placeSelected(details);
       }}
       query={{
         key: process.env.EXPO_PUBLIC_PLACES_API,
