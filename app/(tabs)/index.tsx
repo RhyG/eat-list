@@ -31,7 +31,7 @@ export default function TabOneScreen() {
               visited={marker.visited}
             />
           ))}
-          <Marker coordinate={region} title="Melbourne" />
+          <CustomMarker latLng={region} name={region.name} address={region.description} visited={false} />
         </>
         <OverlayComponent setRegion={setRegion} />
       </MapView>
@@ -43,13 +43,13 @@ function CustomMarker({ name, latLng, address, visited }: Pick<Place, "name" | "
   return (
     <Marker coordinate={latLng} title={name}>
       <Callout>
-        <View style={{ flexDirection: "row", padding: 5, alignItems: "baseline", gap: 5 }}>
-          <View>
-            <Feather name="map-pin" size={14} color="#626268" />
-          </View>
-          <View>
+        <View style={{ flexDirection: "row", padding: 5, alignItems: "center", gap: 5 }}>
+          <View style={{ gap: 5 }}>
             <Text style={{ fontWeight: "bold" }}>{name}</Text>
-            <Text>{address}</Text>
+            <View style={{ flexDirection: "row", gap: 5, alignItems: "center" }}>
+              <Feather name="map-pin" size={14} color="#626268" />
+              <Text>{address}</Text>
+            </View>
           </View>
           <View>{visited ? <Feather name="check-circle" size={14} color="#22c55e" /> : null}</View>
         </View>
