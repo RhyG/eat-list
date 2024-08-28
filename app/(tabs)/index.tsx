@@ -1,10 +1,12 @@
+import { Dispatch, SetStateAction, useState } from "react";
 import { StyleSheet, useWindowDimensions } from "react-native";
-import MapView, { Marker, Region } from "react-native-maps";
-import { Text, View } from "@/components/Themed";
+import MapView, { Callout, Marker, Region } from "react-native-maps";
+import Feather from "@expo/vector-icons/Feather";
 
+import { Text, View } from "@/components/Themed";
 import { places } from "@/constants/places";
 import { PlaceAutoCompleteInput } from "@/components/PlaceAutoCompleteInput";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Place } from "@/types";
 
 const defaultRegion: Region = {
   latitude: -37.8136,
@@ -21,13 +23,38 @@ export default function TabOneScreen() {
       <MapView style={styles.map} region={region} initialRegion={defaultRegion}>
         <>
           {places.map((marker, index) => (
-            <Marker key={`${marker.name}-${index}`} coordinate={marker.latLng} title={marker.name} />
+            <CustomMarker
+              name={marker.name}
+              address={marker.address}
+              latLng={marker.latLng}
+              key={`${marker.name}-${marker.latLng.latitude}`}
+              visited={marker.visited}
+            />
           ))}
           <Marker coordinate={region} title="Melbourne" />
         </>
         <OverlayComponent setRegion={setRegion} />
       </MapView>
     </View>
+  );
+}
+
+function CustomMarker({ name, latLng, address, visited }: Pick<Place, "name" | "latLng" | "address" | "visited">) {
+  return (
+    <Marker coordinate={latLng} title={name}>
+      <Callout>
+        <View style={{ flexDirection: "row", padding: 5, alignItems: "baseline", gap: 5 }}>
+          <View>
+            <Feather name="map-pin" size={14} color="#626268" />
+          </View>
+          <View>
+            <Text style={{ fontWeight: "bold" }}>{name}</Text>
+            <Text>{address}</Text>
+          </View>
+          <View>{visited ? <Feather name="check-circle" size={14} color="#22c55e" /> : null}</View>
+        </View>
+      </Callout>
+    </Marker>
   );
 }
 
