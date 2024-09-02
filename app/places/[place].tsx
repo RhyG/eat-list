@@ -1,6 +1,6 @@
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { Text, View } from "@/components/Themed";
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Pressable, TextInput } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import { usePlacesContext } from "@/providers/PlacesProvider";
@@ -105,15 +105,53 @@ function VisitedButtons({ setVisited, visited }: { setVisited: (visited: boolean
 }
 
 function Categories() {
+  const [categories, setCategories] = useState<string[]>([]);
+
+  const inputRef = useRef<TextInput>(null);
+  const value = useRef<string>("");
+
+  function onAddPress() {
+    if (!inputRef.current) return;
+
+    const text = value.current;
+
+    if (!text) return;
+
+    setCategories((categories) => {
+      if (categories.includes(text)) return categories;
+
+      return [...categories, text];
+    });
+
+    inputRef.current.clear();
+  }
+
   return (
     <View style={{ width: "100%", gap: 10 }}>
-      <Text style={{ fontWeight: 500 }}>Have you been here?</Text>
+      <Text style={{ fontWeight: 500 }}>Categories</Text>
+      <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 5 }}>
+        {categories.map((category, index) => (
+          <View
+            key={index}
+            style={{
+              backgroundColor: "#f4f4f6",
+              paddingVertical: 5,
+              paddingHorizontal: 10,
+              borderRadius: 115,
+            }}
+          >
+            <Text style={{ fontSize: 12 }}>{category}</Text>
+          </View>
+        ))}
+      </View>
       <View style={{ flexDirection: "row" }}>
         <TextInput
-          style={{ borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, marginRight: 5 }}
+          style={{ borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, marginRight: 5, flex: 1 }}
           placeholder="Add a category (e.g. italian, casual, etc.)"
+          ref={inputRef}
+          onChangeText={(text) => (value.current = text)}
         />
-        <View
+        <Pressable
           style={{
             backgroundColor: "#18181a",
             alignItems: "center",
@@ -121,9 +159,10 @@ function Categories() {
             borderRadius: 5,
             paddingHorizontal: 8,
           }}
+          onPress={onAddPress}
         >
           <Feather name="plus" size={18} color="white" />
-        </View>
+        </Pressable>
       </View>
     </View>
   );
