@@ -49,6 +49,7 @@ export default function ItemDetail() {
       <VisitedButtons setVisited={handleSetVisitedPressed} visited={visited} />
       {visited ? (
         <>
+          <Categories />
           <Ratings id={id!} />
           <Comments />
         </>
@@ -98,6 +99,23 @@ function VisitedButtons({ setVisited, visited }: { setVisited: (visited: boolean
             <Text style={{ fontWeight: 500, color: !visited ? "white" : "#18181a" }}>No</Text>
           </View>
         </Pressable>
+      </View>
+    </View>
+  );
+}
+
+function Categories() {
+  return (
+    <View style={{ width: "100%" }}>
+      <Text style={{ fontWeight: 500 }}>Have you been here?</Text>
+      <View style={{ flexDirection: "row" }}>
+        <TextInput
+          style={{ borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, marginTop: 10 }}
+          placeholder="Add a category (e.g. italian, casual, etc.)"
+        />
+        <View style={{ backgroundColor: "#18181a", alignItems: "center", justifyContent: "center" }}>
+          <Feather name="plus" size={24} color="white" />
+        </View>
       </View>
     </View>
   );
