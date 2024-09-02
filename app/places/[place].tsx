@@ -106,15 +106,23 @@ function VisitedButtons({ setVisited, visited }: { setVisited: (visited: boolean
 
 function Categories() {
   return (
-    <View style={{ width: "100%" }}>
+    <View style={{ width: "100%", gap: 10 }}>
       <Text style={{ fontWeight: 500 }}>Have you been here?</Text>
       <View style={{ flexDirection: "row" }}>
         <TextInput
-          style={{ borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, marginTop: 10 }}
+          style={{ borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, marginRight: 5 }}
           placeholder="Add a category (e.g. italian, casual, etc.)"
         />
-        <View style={{ backgroundColor: "#18181a", alignItems: "center", justifyContent: "center" }}>
-          <Feather name="plus" size={24} color="white" />
+        <View
+          style={{
+            backgroundColor: "#18181a",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 5,
+            paddingHorizontal: 8,
+          }}
+        >
+          <Feather name="plus" size={18} color="white" />
         </View>
       </View>
     </View>
