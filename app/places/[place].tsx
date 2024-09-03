@@ -126,24 +126,41 @@ function Categories() {
     inputRef.current.clear();
   }
 
+  function removeCategory(categoryToRemove: string) {
+    setCategories((categories) => {
+      return categories.filter((category) => category !== categoryToRemove);
+    });
+  }
+
   return (
     <View style={{ width: "100%", gap: 10 }}>
       <Text style={{ fontWeight: 500 }}>Categories</Text>
-      <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 5 }}>
-        {categories.map((category, index) => (
-          <View
-            key={index}
-            style={{
-              backgroundColor: "#f4f4f6",
-              paddingVertical: 5,
-              paddingHorizontal: 10,
-              borderRadius: 115,
-            }}
-          >
-            <Text style={{ fontSize: 12 }}>{category}</Text>
-          </View>
-        ))}
-      </View>
+      {categories.length > 0 ? (
+        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 5 }}>
+          {categories.map((category, index) => (
+            <View
+              key={index}
+              style={{
+                backgroundColor: "#f4f4f6",
+                paddingVertical: 5,
+                paddingHorizontal: 10,
+                borderRadius: 115,
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 5,
+              }}
+            >
+              <Text style={{ fontSize: 12 }}>{category}</Text>
+              <Pressable
+                style={{ borderWidth: 1, borderColor: "#18181a", borderRadius: 10, padding: 2 }}
+                onPress={() => removeCategory(category)}
+              >
+                <Feather name="x" size={12} color="#18181a" />
+              </Pressable>
+            </View>
+          ))}
+        </View>
+      ) : null}
       <View style={{ flexDirection: "row" }}>
         <TextInput
           style={{ borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, marginRight: 5, flex: 1 }}
