@@ -169,6 +169,7 @@ function Categories() {
           placeholder="Add a category (e.g. italian, casual, etc.)"
           ref={inputRef}
           onChangeText={(text) => (value.current = text)}
+          autoCapitalize="none"
         />
         <Pressable
           style={{
