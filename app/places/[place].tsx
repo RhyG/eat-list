@@ -109,7 +109,7 @@ function VisitedButtons({ setVisited, visited }: { setVisited: (visited: boolean
 function Categories({ id }: { id: string }) {
   const { updatePlace, places } = usePlacesContext();
 
-  const [categories, setCategories] = useState<string[]>(places[id].categories);
+  const [categories, setCategories] = useState<string[]>(places[id].categories ?? []);
 
   const inputRef = useRef<TextInput>(null);
   const value = useRef<string>("");
