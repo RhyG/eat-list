@@ -36,6 +36,8 @@ export default function ItemDetail() {
     updatePlace(id, updatedPlace);
   }
 
+  if (!id) return null;
+
   return (
     <View style={{ flex: 1, alignItems: "center", paddingHorizontal: 50, gap: 30, paddingTop: 20 }}>
       <View>
@@ -49,8 +51,8 @@ export default function ItemDetail() {
       <VisitedButtons setVisited={handleSetVisitedPressed} visited={visited} />
       {visited ? (
         <>
-          <Categories />
-          <Ratings id={id!} />
+          <Categories id={id} />
+          <Ratings id={id} />
           <Comments />
         </>
       ) : null}
@@ -104,8 +106,10 @@ function VisitedButtons({ setVisited, visited }: { setVisited: (visited: boolean
   );
 }
 
-function Categories() {
-  const [categories, setCategories] = useState<string[]>([]);
+function Categories({ id }: { id: string }) {
+  const { updatePlace, places } = usePlacesContext();
+
+  const [categories, setCategories] = useState<string[]>(places[id].categories);
 
   const inputRef = useRef<TextInput>(null);
   const value = useRef<string>("");
@@ -126,6 +130,12 @@ function Categories() {
     });
 
     inputRef.current.clear();
+
+    const selectedPlace = places[id];
+
+    const updatedPlace = { ...selectedPlace, categories: [...categories, trimmedText] };
+
+    updatePlace(id, updatedPlace);
   }
 
   function removeCategory(categoryToRemove: string) {

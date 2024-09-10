@@ -54,21 +54,13 @@ export default function TabTwoScreen() {
               <Text style={{ color: "#626268", marginLeft: 5, fontSize: 12 }}>{item.address}</Text>
             </View>
             <View style={{ flexDirection: "row", gap: 4 }}>
-              <View
-                style={{ backgroundColor: "#f4f4f6", paddingVertical: 5, paddingHorizontal: 10, borderRadius: 115 }}
-              >
-                <Text style={{ fontSize: 12 }}>italian</Text>
-              </View>
-              <View
-                style={{ backgroundColor: "#f4f4f6", paddingVertical: 5, paddingHorizontal: 10, borderRadius: 115 }}
-              >
-                <Text style={{ fontSize: 12 }}>quiet</Text>
-              </View>
-              <View
-                style={{ backgroundColor: "#f4f4f6", paddingVertical: 5, paddingHorizontal: 10, borderRadius: 115 }}
-              >
-                <Text style={{ fontSize: 12 }}>bbq</Text>
-              </View>
+              {(places[item.id]?.categories ?? []).map((category) => (
+                <View
+                  style={{ backgroundColor: "#f4f4f6", paddingVertical: 5, paddingHorizontal: 10, borderRadius: 115 }}
+                >
+                  <Text style={{ fontSize: 12 }}>{category}</Text>
+                </View>
+              ))}
             </View>
           </View>
           <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
