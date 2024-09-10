@@ -87,6 +87,7 @@ export default function TabTwoScreen() {
 
 function FilterHeader({ setFilter, currentFilter }: { setFilter: (filter: Filter) => void; currentFilter: Filter }) {
   const { places } = usePlacesContext();
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const tags = useMemo(() => {
     const tags = new Set<string>();
@@ -101,7 +102,7 @@ function FilterHeader({ setFilter, currentFilter }: { setFilter: (filter: Filter
     });
 
     return Array.from(tags);
-  }, []);
+  }, [places]);
 
   return (
     <View style={{ backgroundColor: "transparent" }}>
@@ -110,30 +111,45 @@ function FilterHeader({ setFilter, currentFilter }: { setFilter: (filter: Filter
           onPress={() => setFilter("all")}
           style={[styles.filterButton, { backgroundColor: currentFilter === "all" ? "#3983f7" : "white" }]}
         >
-          <Text style={{ fontSize: 12, color: currentFilter === "all" ? "white" : "black" }}>All</Text>
+          <Text style={{ fontSize: 14, color: currentFilter === "all" ? "white" : "black" }}>All</Text>
         </Pressable>
         <Pressable
           onPress={() => setFilter("visited")}
           style={[styles.filterButton, { backgroundColor: currentFilter === "visited" ? "#3983f7" : "white" }]}
         >
-          <Text style={{ fontSize: 12, color: currentFilter === "visited" ? "white" : "black" }}>Visited</Text>
+          <Text style={{ fontSize: 14, color: currentFilter === "visited" ? "white" : "black" }}>Visited</Text>
         </Pressable>
         <Pressable
           onPress={() => setFilter("not-visited")}
           style={[styles.filterButton, { backgroundColor: currentFilter === "not-visited" ? "#3983f7" : "white" }]}
         >
-          <Text style={{ fontSize: 12, color: currentFilter === "not-visited" ? "white" : "black" }}>Not Visited</Text>
+          <Text style={{ fontSize: 14, color: currentFilter === "not-visited" ? "white" : "black" }}>Not Visited</Text>
         </Pressable>
       </View>
       <Text style={{ fontWeight: "bold", fontSize: 16, marginBottom: 10 }}>Filter by Tags:</Text>
-      <View style={{ flexDirection: "row", gap: 4, backgroundColor: "transparent" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          gap: 4,
+          backgroundColor: "transparent",
+          width: "100%",
+          flexWrap: "wrap",
+          paddingBottom: 10,
+        }}
+      >
         {tags.map((tag) => (
           <Pressable
             key={tag}
-            onPress={() => console.log(tag)}
-            style={[styles.filterButton, { backgroundColor: currentFilter === tag ? "#3983f7" : "white" }]}
+            onPress={() => {
+              if (selectedTags.includes(tag)) {
+                setSelectedTags((tags) => tags.filter((t) => t !== tag));
+              } else {
+                setSelectedTags((tags) => [...tags, tag]);
+              }
+            }}
+            style={[styles.filterButton, { backgroundColor: selectedTags.includes(tag) ? "#22c55e" : "white" }]}
           >
-            <Text style={{ fontSize: 12, color: currentFilter === tag ? "white" : "black" }}>{tag}</Text>
+            <Text style={{ fontSize: 14, color: selectedTags.includes(tag) ? "white" : "black" }}>{tag}</Text>
           </Pressable>
         ))}
       </View>
