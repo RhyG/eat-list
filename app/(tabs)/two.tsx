@@ -86,26 +86,57 @@ export default function TabTwoScreen() {
 }
 
 function FilterHeader({ setFilter, currentFilter }: { setFilter: (filter: Filter) => void; currentFilter: Filter }) {
+  const { places } = usePlacesContext();
+
+  const tags = useMemo(() => {
+    const tags = new Set<string>();
+
+    Object.keys(places).forEach((key) => {
+      const place = places[key];
+      (place.categories ?? []).forEach((category) => {
+        if (!tags.has(category)) {
+          tags.add(category);
+        }
+      });
+    });
+
+    return Array.from(tags);
+  }, []);
+
   return (
-    <View style={{ flexDirection: "row", paddingBottom: 10, backgroundColor: "transparent", gap: 10 }}>
-      <Pressable
-        onPress={() => setFilter("all")}
-        style={[styles.filterButton, { backgroundColor: currentFilter === "all" ? "#3983f7" : "white" }]}
-      >
-        <Text style={{ color: currentFilter === "all" ? "white" : "black" }}>All</Text>
-      </Pressable>
-      <Pressable
-        onPress={() => setFilter("visited")}
-        style={[styles.filterButton, { backgroundColor: currentFilter === "visited" ? "#3983f7" : "white" }]}
-      >
-        <Text style={{ color: currentFilter === "visited" ? "white" : "black" }}>Visited</Text>
-      </Pressable>
-      <Pressable
-        onPress={() => setFilter("not-visited")}
-        style={[styles.filterButton, { backgroundColor: currentFilter === "not-visited" ? "#3983f7" : "white" }]}
-      >
-        <Text style={{ color: currentFilter === "not-visited" ? "white" : "black" }}>Not Visited</Text>
-      </Pressable>
+    <View style={{ backgroundColor: "transparent" }}>
+      <View style={{ flexDirection: "row", paddingBottom: 10, backgroundColor: "transparent", gap: 10 }}>
+        <Pressable
+          onPress={() => setFilter("all")}
+          style={[styles.filterButton, { backgroundColor: currentFilter === "all" ? "#3983f7" : "white" }]}
+        >
+          <Text style={{ fontSize: 12, color: currentFilter === "all" ? "white" : "black" }}>All</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => setFilter("visited")}
+          style={[styles.filterButton, { backgroundColor: currentFilter === "visited" ? "#3983f7" : "white" }]}
+        >
+          <Text style={{ fontSize: 12, color: currentFilter === "visited" ? "white" : "black" }}>Visited</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => setFilter("not-visited")}
+          style={[styles.filterButton, { backgroundColor: currentFilter === "not-visited" ? "#3983f7" : "white" }]}
+        >
+          <Text style={{ fontSize: 12, color: currentFilter === "not-visited" ? "white" : "black" }}>Not Visited</Text>
+        </Pressable>
+      </View>
+      <Text style={{ fontWeight: "bold", fontSize: 16, marginBottom: 10 }}>Filter by Tags:</Text>
+      <View style={{ flexDirection: "row", gap: 4, backgroundColor: "transparent" }}>
+        {tags.map((tag) => (
+          <Pressable
+            key={tag}
+            onPress={() => console.log(tag)}
+            style={[styles.filterButton, { backgroundColor: currentFilter === tag ? "#3983f7" : "white" }]}
+          >
+            <Text style={{ fontSize: 12, color: currentFilter === tag ? "white" : "black" }}>{tag}</Text>
+          </Pressable>
+        ))}
+      </View>
     </View>
   );
 }
@@ -148,7 +179,7 @@ const styles = StyleSheet.create({
   filterButton: {
     borderRadius: 20,
     backgroundColor: "white",
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
   },
 });
