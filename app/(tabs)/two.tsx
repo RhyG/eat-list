@@ -87,21 +87,21 @@ export default function TabTwoScreen() {
 
 function FilterHeader({ setFilter, currentFilter }: { setFilter: (filter: Filter) => void; currentFilter: Filter }) {
   const { places } = usePlacesContext();
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
-  const tags = useMemo(() => {
-    const tags = new Set<string>();
+  const filteredCategories = useMemo(() => {
+    const categories = new Set<string>();
 
     Object.keys(places).forEach((key) => {
       const place = places[key];
       (place.categories ?? []).forEach((category) => {
-        if (!tags.has(category)) {
-          tags.add(category);
+        if (!categories.has(category)) {
+          categories.add(category);
         }
       });
     });
 
-    return Array.from(tags);
+    return Array.from(categories);
   }, [places]);
 
   return (
@@ -137,19 +137,19 @@ function FilterHeader({ setFilter, currentFilter }: { setFilter: (filter: Filter
           paddingBottom: 10,
         }}
       >
-        {tags.map((tag) => (
+        {filteredCategories.map((tag) => (
           <Pressable
             key={tag}
             onPress={() => {
-              if (selectedTags.includes(tag)) {
-                setSelectedTags((tags) => tags.filter((t) => t !== tag));
+              if (selectedCategories.includes(tag)) {
+                setSelectedCategories((tags) => tags.filter((t) => t !== tag));
               } else {
-                setSelectedTags((tags) => [...tags, tag]);
+                setSelectedCategories((tags) => [...tags, tag]);
               }
             }}
-            style={[styles.filterButton, { backgroundColor: selectedTags.includes(tag) ? "#22c55e" : "white" }]}
+            style={[styles.filterButton, { backgroundColor: selectedCategories.includes(tag) ? "#22c55e" : "white" }]}
           >
-            <Text style={{ fontSize: 14, color: selectedTags.includes(tag) ? "white" : "black" }}>{tag}</Text>
+            <Text style={{ fontSize: 14, color: selectedCategories.includes(tag) ? "white" : "black" }}>{tag}</Text>
           </Pressable>
         ))}
       </View>
