@@ -49,9 +49,9 @@ export default function ItemDetail() {
         </Text>
       </View>
       <VisitedButtons setVisited={handleSetVisitedPressed} visited={visited} />
+      <Categories id={id} />
       {visited ? (
         <>
-          <Categories id={id} />
           <Ratings id={id} />
           <Comments />
         </>

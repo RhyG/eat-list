@@ -45,6 +45,11 @@ export default function TabTwoScreen() {
   }, [filter, places, selectedCategories, sortedPlaces]);
 
   const renderItem: ListRenderItem<(typeof places)[number]> = ({ item }) => {
+    const categories = places[item.id]?.categories ?? [];
+    const showExtraCategoryIndicator = categories.length > 3;
+
+    const categoriesToRender = categories.slice(0, 3);
+
     return (
       <Link
         href={{
@@ -62,13 +67,20 @@ export default function TabTwoScreen() {
               <Text style={{ color: "#626268", marginLeft: 5, fontSize: 12 }}>{item.address}</Text>
             </View>
             <View style={{ flexDirection: "row", gap: 4 }}>
-              {(places[item.id]?.categories ?? []).map((category) => (
+              {categoriesToRender.map((category) => (
                 <View
                   style={{ backgroundColor: "#f4f4f6", paddingVertical: 5, paddingHorizontal: 10, borderRadius: 115 }}
                 >
                   <Text style={{ fontSize: 12 }}>{category}</Text>
                 </View>
               ))}
+              {showExtraCategoryIndicator ? (
+                <View
+                  style={{ backgroundColor: "#f4f4f6", paddingVertical: 5, paddingHorizontal: 10, borderRadius: 115 }}
+                >
+                  <Text style={{ fontSize: 12 }}>+{categories.length - 3}</Text>
+                </View>
+              ) : null}
             </View>
           </View>
           <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
