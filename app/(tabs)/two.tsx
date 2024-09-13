@@ -3,7 +3,7 @@ import Feather from "@expo/vector-icons/Feather";
 import { Text, View } from "@/components/Themed";
 
 import { Link, useNavigation } from "expo-router";
-import { useLayoutEffect, useMemo, useState } from "react";
+import { Dispatch, SetStateAction, useLayoutEffect, useMemo, useState } from "react";
 import { usePlacesContext } from "@/providers/PlacesProvider";
 
 type Filter = "visited" | "not-visited" | "all";
@@ -21,20 +21,28 @@ export default function TabTwoScreen() {
   const { places } = usePlacesContext();
 
   const [filter, setFilter] = useState<Filter>("all");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+  const sortedPlaces = useMemo(() => {
+    return Object.values(places).sort((a, b) => a.name.localeCompare(b.name));
+  }, [places]);
 
   const filteredList = useMemo(() => {
-    const placesArr = Object.keys(places).map((key) => places[key]);
-    const sorted = placesArr.sort((a, b) => {
-      if (a.name < b.name) return -1;
-      if (a.name > b.name) return 1;
-      return 0;
-    });
-
-    if (filter === "all") {
-      return sorted;
+    // Early return for no filtering
+    if (filter === "all" && selectedCategories.length === 0) {
+      return sortedPlaces;
     }
-    return sorted.filter((place) => (filter === "visited" ? place.visited : !place.visited));
-  }, [filter, places]);
+
+    return sortedPlaces.filter((place) => {
+      const matchesCategory =
+        selectedCategories.length === 0 ||
+        (place.categories && selectedCategories.every((category) => place.categories.includes(category)));
+
+      const matchesVisited = filter === "all" || (filter === "visited" ? place.visited : !place.visited);
+
+      return matchesCategory && matchesVisited;
+    });
+  }, [filter, places, selectedCategories, sortedPlaces]);
 
   const renderItem: ListRenderItem<(typeof places)[number]> = ({ item }) => {
     return (
@@ -79,17 +87,33 @@ export default function TabTwoScreen() {
         data={filteredList}
         renderItem={renderItem}
         contentContainerStyle={{ gap: 8 }}
-        ListHeaderComponent={<FilterHeader setFilter={setFilter} currentFilter={filter} />}
+        ListHeaderComponent={
+          <FilterHeader
+            setFilter={setFilter}
+            currentFilter={filter}
+            selectedCategories={selectedCategories}
+            setSelectedCategories={setSelectedCategories}
+          />
+        }
       />
     </View>
   );
 }
 
-function FilterHeader({ setFilter, currentFilter }: { setFilter: (filter: Filter) => void; currentFilter: Filter }) {
+function FilterHeader({
+  setFilter,
+  currentFilter,
+  selectedCategories,
+  setSelectedCategories,
+}: {
+  setFilter: Dispatch<SetStateAction<Filter>>;
+  currentFilter: Filter;
+  selectedCategories: string[];
+  setSelectedCategories: Dispatch<SetStateAction<string[]>>;
+}) {
   const { places } = usePlacesContext();
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
-  const filteredCategories = useMemo(() => {
+  const allCategories = useMemo(() => {
     const categories = new Set<string>();
 
     Object.keys(places).forEach((key) => {
@@ -137,7 +161,7 @@ function FilterHeader({ setFilter, currentFilter }: { setFilter: (filter: Filter
           paddingBottom: 10,
         }}
       >
-        {filteredCategories.map((tag) => (
+        {allCategories.map((tag) => (
           <Pressable
             key={tag}
             onPress={() => {
