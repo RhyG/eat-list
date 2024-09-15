@@ -1,10 +1,12 @@
-import { FlatList, ListRenderItem, StyleSheet, Pressable } from "react-native";
-import Feather from "@expo/vector-icons/Feather";
-import { Text, View } from "@/components/Themed";
-
-import { Link, useNavigation } from "expo-router";
 import { Dispatch, SetStateAction, useLayoutEffect, useMemo, useState } from "react";
+import { StyleSheet, Pressable } from "react-native";
+import Feather from "@expo/vector-icons/Feather";
+import { FlashList, ListRenderItem } from "@shopify/flash-list";
+import { Link, useNavigation } from "expo-router";
+
+import { Text, View } from "@/components/Themed";
 import { usePlacesContext } from "@/providers/PlacesProvider";
+import { Place } from "@/types";
 
 type Filter = "visited" | "not-visited" | "all";
 
@@ -44,7 +46,7 @@ export default function TabTwoScreen() {
     });
   }, [filter, places, selectedCategories, sortedPlaces]);
 
-  const renderItem: ListRenderItem<(typeof places)[number]> = ({ item }) => {
+  const renderItem: ListRenderItem<Place> = ({ item }) => {
     const categories = places[item.id]?.categories ?? [];
     const showExtraCategoryIndicator = categories.length > 3;
 
@@ -95,10 +97,9 @@ export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
       <Text style={{ fontWeight: "bold", fontSize: 22, paddingBottom: 10 }}>All Places</Text>
-      <FlatList
+      <FlashList
         data={filteredList}
         renderItem={renderItem}
-        contentContainerStyle={{ gap: 8 }}
         ListHeaderComponent={
           <FilterHeader
             setFilter={setFilter}
@@ -107,6 +108,7 @@ export default function TabTwoScreen() {
             setSelectedCategories={setSelectedCategories}
           />
         }
+        estimatedItemSize={373}
       />
     </View>
   );
@@ -227,6 +229,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     borderRadius: 8,
+    marginBottom: 8,
   },
   filterButton: {
     borderRadius: 20,
