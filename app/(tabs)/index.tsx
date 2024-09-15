@@ -8,6 +8,11 @@ import { places } from "@/constants/places";
 import { PlaceAutoCompleteInput } from "@/components/PlaceAutoCompleteInput";
 import { Place } from "@/types";
 
+type MapSelection = Region & {
+  address: string;
+  name: string;
+};
+
 const defaultRegion: Region = {
   latitude: -37.8136,
   longitude: 144.9631,
@@ -16,13 +21,13 @@ const defaultRegion: Region = {
 };
 
 export default function TabOneScreen() {
-  const [region, setRegion] = useState<Region>(defaultRegion);
+  const [selectedRegion, setSelectedRegion] = useState<MapSelection>();
 
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} region={region} initialRegion={defaultRegion}>
+      <MapView style={styles.map} region={selectedRegion} initialRegion={defaultRegion}>
         <>
-          {places.map((marker, index) => (
+          {places.map((marker) => (
             <CustomMarker
               name={marker.name}
               address={marker.address}
@@ -31,9 +36,16 @@ export default function TabOneScreen() {
               visited={marker.visited}
             />
           ))}
-          <CustomMarker latLng={region} name={region.name} address={region.description} visited={false} />
+          {selectedRegion ? (
+            <CustomMarker
+              latLng={selectedRegion}
+              name={selectedRegion.name}
+              address={selectedRegion.address}
+              visited={false}
+            />
+          ) : null}
         </>
-        <OverlayComponent setRegion={setRegion} />
+        <OverlayComponent setRegion={setSelectedRegion} />
       </MapView>
     </View>
   );
@@ -58,7 +70,7 @@ function CustomMarker({ name, latLng, address, visited }: Pick<Place, "name" | "
   );
 }
 
-function OverlayComponent({ setRegion }: { setRegion: Dispatch<SetStateAction<Region>> }) {
+function OverlayComponent({ setRegion }: { setRegion: Dispatch<SetStateAction<MapSelection | undefined>> }) {
   const { width } = useWindowDimensions();
 
   return (
@@ -75,10 +87,12 @@ function OverlayComponent({ setRegion }: { setRegion: Dispatch<SetStateAction<Re
       <PlaceAutoCompleteInput
         placeSelected={(details) =>
           setRegion({
+            ...details,
             latitude: details.geometry.location.lat,
             longitude: details.geometry.location.lng,
             latitudeDelta: 0.006,
             longitudeDelta: 0.002,
+            address: details.formatted_address,
           })
         }
       />
