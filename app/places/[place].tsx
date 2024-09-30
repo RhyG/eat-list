@@ -39,7 +39,7 @@ export default function ItemDetail() {
   if (!id) return null;
 
   return (
-    <View style={{ flex: 1, alignItems: "center", paddingHorizontal: 50, gap: 30, paddingTop: 20 }}>
+    <View style={{ flex: 1, alignItems: "center", paddingHorizontal: 40, gap: 30, paddingTop: 20 }}>
       <View>
         <Text style={{ textAlign: "center", fontWeight: "bold", fontSize: 22 }} numberOfLines={2}>
           {name}
