@@ -72,6 +72,7 @@ export default function TabTwoScreen() {
               {categoriesToRender.map((category) => (
                 <View
                   style={{ backgroundColor: "#f4f4f6", paddingVertical: 5, paddingHorizontal: 10, borderRadius: 115 }}
+                  key={category}
                 >
                   <Text style={{ fontSize: 12 }}>{category}</Text>
                 </View>
