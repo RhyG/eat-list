@@ -74,16 +74,7 @@ function OverlayComponent({ setRegion }: { setRegion: Dispatch<SetStateAction<Ma
   const { width } = useWindowDimensions();
 
   return (
-    <View
-      style={{
-        backgroundColor: "white",
-        borderRadius: 5,
-        position: "absolute",
-        top: 20,
-        width: 300,
-        left: width / 2 - 150,
-      }}
-    >
+    <View style={[styles.autocompleteContainer, { left: width / 2 - 150 }]}>
       <PlaceAutoCompleteInput
         placeSelected={(details) =>
           setRegion({
@@ -118,5 +109,12 @@ const styles = StyleSheet.create({
   map: {
     width: "100%",
     height: "100%",
+  },
+  autocompleteContainer: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    position: "absolute",
+    top: 20,
+    width: 300,
   },
 });
