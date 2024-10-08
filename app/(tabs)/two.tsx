@@ -70,12 +70,7 @@ export default function TabTwoScreen() {
             </View>
             <View style={{ flexDirection: "row", gap: 4 }}>
               {categoriesToRender.map((category) => (
-                <View
-                  style={{ backgroundColor: "#f4f4f6", paddingVertical: 5, paddingHorizontal: 10, borderRadius: 115 }}
-                  key={category}
-                >
-                  <Text style={{ fontSize: 12 }}>{category}</Text>
-                </View>
+                <Category category={category} key={category} />
               ))}
               {showExtraCategoryIndicator ? (
                 <View
@@ -111,6 +106,14 @@ export default function TabTwoScreen() {
         }
         estimatedItemSize={373}
       />
+    </View>
+  );
+}
+
+function Category({ category }: { category: string }) {
+  return (
+    <View style={{ backgroundColor: "#f4f4f6", paddingVertical: 5, paddingHorizontal: 10, borderRadius: 115 }}>
+      <Text style={{ fontSize: 12 }}>{category}</Text>
     </View>
   );
 }
