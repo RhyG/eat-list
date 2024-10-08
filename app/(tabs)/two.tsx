@@ -201,19 +201,9 @@ function FilterHeader({
 
 function Rating({ rating }: { rating: number }) {
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-        marginLeft: 10,
-        backgroundColor: "#fdf9c2",
-        paddingHorizontal: 8,
-        paddingVertical: 5,
-        borderRadius: 12,
-      }}
-    >
+    <View style={styles.ratingContainer}>
       <Feather name="star" size={14} color="#eab208" />
-      <Text style={{ color: "#eab208", marginLeft: 5, fontWeight: "bold", fontSize: 12 }}>{rating}</Text>
+      <Text style={styles.ratingText}>{rating}</Text>
     </View>
   );
 }
@@ -241,4 +231,14 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 12,
   },
+  ratingContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 10,
+    backgroundColor: "#fdf9c2",
+    paddingHorizontal: 8,
+    paddingVertical: 5,
+    borderRadius: 12,
+  },
+  ratingText: { color: "#eab208", marginLeft: 5, fontWeight: "bold", fontSize: 12 },
 });
