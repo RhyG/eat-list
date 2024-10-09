@@ -92,7 +92,7 @@ export default function TabTwoScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontWeight: "bold", fontSize: 22, paddingBottom: 10 }}>All Places</Text>
+      <Text style={styles.allPlacesText}>All Places</Text>
       <FlashList
         data={filteredList}
         renderItem={renderItem}
@@ -241,4 +241,5 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   ratingText: { color: "#eab208", marginLeft: 5, fontWeight: "bold", fontSize: 12 },
+  allPlacesText: { fontWeight: "bold", fontSize: 22, paddingBottom: 10 },
 });
