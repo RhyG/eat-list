@@ -10,6 +10,7 @@ import { useColorScheme } from "@/components/useColorScheme";
 import { Storage } from "@/modules/storage";
 import { places } from "@/constants/places";
 import { PlacesProvider } from "@/providers/PlacesProvider";
+import { useAppLoad } from "@/hooks/useAppLoad";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -25,21 +26,7 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
-    ...FontAwesome.font,
-  });
-
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
-  useEffect(() => {
-    if (error) throw error;
-  }, [error]);
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+  const loaded = useAppLoad();
 
   if (!loaded) {
     return null;
