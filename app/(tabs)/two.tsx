@@ -169,16 +169,7 @@ function FilterHeader({
         </Pressable>
       </View>
       <Text style={{ fontWeight: "bold", fontSize: 16, marginBottom: 10 }}>Filter by Tags:</Text>
-      <View
-        style={{
-          flexDirection: "row",
-          gap: 4,
-          backgroundColor: "transparent",
-          width: "100%",
-          flexWrap: "wrap",
-          paddingBottom: 10,
-        }}
-      >
+      <View style={styles.categoriesContainer}>
         {allCategories.map((tag) => (
           <Pressable
             key={tag}
@@ -242,4 +233,12 @@ const styles = StyleSheet.create({
   },
   ratingText: { color: "#eab208", marginLeft: 5, fontWeight: "bold", fontSize: 12 },
   allPlacesText: { fontWeight: "bold", fontSize: 22, paddingBottom: 10 },
+  categoriesContainer: {
+    flexDirection: "row",
+    gap: 4,
+    backgroundColor: "transparent",
+    width: "100%",
+    flexWrap: "wrap",
+    paddingBottom: 10,
+  },
 });
