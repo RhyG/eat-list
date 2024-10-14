@@ -150,18 +150,7 @@ function Categories({ id }: { id: string }) {
       {categories.length > 0 ? (
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 5 }}>
           {categories.map((category, index) => (
-            <View
-              key={index}
-              style={{
-                backgroundColor: "#f4f4f6",
-                paddingVertical: 5,
-                paddingHorizontal: 10,
-                borderRadius: 115,
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 5,
-              }}
-            >
+            <View key={index} style={styles.categoryContainer}>
               <Text style={{ fontSize: 12 }}>{category}</Text>
               <Pressable
                 style={{ borderWidth: 1, borderColor: "#18181a", borderRadius: 10, padding: 2 }}
@@ -279,4 +268,13 @@ const styles = StyleSheet.create({
     width: 50,
   },
   ratingText: { fontWeight: "bold", fontSize: 16 },
+  categoryContainer: {
+    backgroundColor: "#f4f4f6",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 115,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+  },
 });
