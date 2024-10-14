@@ -15,11 +15,13 @@ export const PlaceAutoCompleteInput = ({ placeSelected }: { placeSelected: (deta
         language: "en",
       }}
       styles={{
-        container: { flex: 1 },
-        textInputContainer: { flex: 1 },
-        textInput: { flex: 1 },
+        container: flexStyle,
+        textInputContainer: flexStyle,
+        textInput: flexStyle,
       }}
       fetchDetails
     />
   );
 };
+
+const flexStyle = { flex: 1 };
