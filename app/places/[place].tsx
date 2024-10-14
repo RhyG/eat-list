@@ -1,7 +1,7 @@
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { Text, View } from "@/components/Themed";
 import { useLayoutEffect, useRef, useState } from "react";
-import { Pressable, TextInput } from "react-native";
+import { Pressable, TextInput, StyleSheet } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import { usePlacesContext } from "@/providers/PlacesProvider";
 
@@ -245,19 +245,9 @@ function Rating({
   return (
     <Pressable
       onPress={() => setSelected(index)}
-      style={{
-        alignItems: "center",
-        justifyContent: "center",
-        borderWidth: 1,
-        borderColor: "#d1d1db",
-        padding: 10,
-        borderRadius: 5,
-        height: 50,
-        width: 50,
-        backgroundColor: selected ? "#18181a" : "transparent",
-      }}
+      style={[styles.ratingButton, { backgroundColor: selected ? "#18181a" : "white" }]}
     >
-      <Text style={{ fontWeight: "bold", fontSize: 16, color: selected ? "white" : "#18181a" }}>{index}</Text>
+      <Text style={[styles.ratingText, { color: selected ? "white" : "#18181a" }]}>{index}</Text>
     </Pressable>
   );
 }
@@ -276,3 +266,17 @@ function Comments() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  ratingButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "#d1d1db",
+    padding: 10,
+    borderRadius: 5,
+    height: 50,
+    width: 50,
+  },
+  ratingText: { fontWeight: "bold", fontSize: 16 },
+});
