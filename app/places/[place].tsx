@@ -45,7 +45,7 @@ export default function ItemDetail() {
           {name}
         </Text>
         <Text style={{ textAlign: "center", fontSize: 16, color: "#626268" }} numberOfLines={2}>
-          123 Main St, Brisbane QLD
+          123 Miner St, Charters Towers
         </Text>
       </View>
       <VisitedButtons setVisited={handleSetVisitedPressed} visited={visited} />
