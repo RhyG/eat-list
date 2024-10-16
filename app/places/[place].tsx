@@ -4,18 +4,15 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { Pressable, TextInput, StyleSheet } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import { usePlacesContext } from "@/providers/PlacesProvider";
+import { useNavigationOptions } from "@/hooks/useNavigationOptions";
 
 export default function ItemDetail() {
   const { name, id, visited: _visited } = useLocalSearchParams<{ name: string; id: string; visited: string }>();
 
-  const navigation = useNavigation();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTitle: "",
-      headerBackTitle: "Places",
-      headerShadowVisible: false,
-    });
+  useNavigationOptions({
+    headerTitle: "",
+    headerBackTitle: "Places",
+    headerShadowVisible: false,
   });
 
   const { updatePlace, places } = usePlacesContext();
