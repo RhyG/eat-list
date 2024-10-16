@@ -1,6 +1,6 @@
-import { useLocalSearchParams, useNavigation } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import { Text, View } from "@/components/Themed";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Pressable, TextInput, StyleSheet } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import { usePlacesContext } from "@/providers/PlacesProvider";

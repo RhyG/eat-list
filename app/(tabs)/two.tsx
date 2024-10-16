@@ -1,8 +1,8 @@
-import { Dispatch, SetStateAction, useLayoutEffect, useMemo, useState } from "react";
+import { Dispatch, SetStateAction, useMemo, useState } from "react";
 import { StyleSheet, Pressable } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import { FlashList, ListRenderItem } from "@shopify/flash-list";
-import { Link, useNavigation } from "expo-router";
+import { Link } from "expo-router";
 
 import { Text, View } from "@/components/Themed";
 import { usePlacesContext } from "@/providers/PlacesProvider";
