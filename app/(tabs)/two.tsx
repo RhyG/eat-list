@@ -7,17 +7,14 @@ import { Link, useNavigation } from "expo-router";
 import { Text, View } from "@/components/Themed";
 import { usePlacesContext } from "@/providers/PlacesProvider";
 import { Place } from "@/types";
+import { useNavigationOptions } from "@/hooks/useNavigationOptions";
 
 type Filter = "visited" | "not-visited" | "all";
 
 export default function TabTwoScreen() {
-  const navigation = useNavigation();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-      headerTransparent: true,
-    });
+  useNavigationOptions({
+    headerShown: false,
+    headerTransparent: true,
   });
 
   const { places } = usePlacesContext();
