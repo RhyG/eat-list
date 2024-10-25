@@ -205,12 +205,12 @@ function Ratings({ id }: { id: string }) {
   return (
     <View>
       <Text style={{ fontWeight: "500", marginBottom: 10 }}>Your Rating</Text>
-      <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
+      <View style={styles.ratingsGroupContainer}>
         {firstRatings.map((i) => (
           <Rating key={i} index={i} selected={selectedRating === i} setSelected={handleRatingPressed} />
         ))}
       </View>
-      <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%", marginTop: 10 }}>
+      <View style={[styles.ratingsGroupContainer, { marginTop: 10 }]}>
         {secondRatings.map((i) => (
           <Rating key={i} index={i} selected={selectedRating === i} setSelected={handleRatingPressed} />
         ))}
@@ -274,5 +274,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 5,
   },
+  ratingsGroupContainer: { flexDirection: "row", justifyContent: "space-between", width: "100%" },
   commentsInput: { borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, height: 160 },
 });
