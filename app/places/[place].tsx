@@ -76,7 +76,7 @@ function VisitedButtons({ setVisited, visited }: { setVisited: (visited: boolean
           }}
           onPress={() => setVisited(true)}
         >
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 8, backgroundColor: "transparent" }}>
+          <View style={styles.visitedButtonInnerContainer}>
             <Feather name="check" size={18} color={visited ? "white" : "#18181a"} backgroundColor={"transparent"} />
             <Text style={{ fontWeight: 500, color: visited ? "white" : "#18181a" }}>Yes</Text>
           </View>
@@ -93,7 +93,7 @@ function VisitedButtons({ setVisited, visited }: { setVisited: (visited: boolean
           }}
           onPress={() => setVisited(false)}
         >
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 8, backgroundColor: "transparent" }}>
+          <View style={styles.visitedButtonInnerContainer}>
             <Feather name="x" size={18} color={!visited ? "white" : "#18181a"} />
             <Text style={{ fontWeight: 500, color: !visited ? "white" : "#18181a" }}>No</Text>
           </View>
@@ -274,6 +274,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 5,
   },
+  visitedButtonInnerContainer: { flexDirection: "row", alignItems: "center", gap: 8, backgroundColor: "transparent" },
   ratingsGroupContainer: { flexDirection: "row", justifyContent: "space-between", width: "100%" },
   commentsInput: { borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, height: 160 },
 });
