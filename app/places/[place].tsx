@@ -161,7 +161,7 @@ function Categories({ id }: { id: string }) {
       ) : null}
       <View style={{ flexDirection: "row" }}>
         <TextInput
-          style={{ borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, marginRight: 5, flex: 1 }}
+          style={styles.categoryInput}
           placeholder="Add a category (e.g. italian, casual, etc.)"
           ref={inputRef}
           onChangeText={(text) => (value.current = text)}
@@ -278,4 +278,5 @@ const styles = StyleSheet.create({
   visitedButtonInnerContainer: { flexDirection: "row", alignItems: "center", gap: 8, backgroundColor: "transparent" },
   ratingsGroupContainer: { flexDirection: "row", justifyContent: "space-between", width: "100%" },
   commentsInput: { borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, height: 160 },
+  categoryInput: { borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, marginRight: 5, flex: 1 },
 });
