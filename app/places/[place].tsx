@@ -245,7 +245,7 @@ function Comments() {
       <TextInput
         multiline
         textAlignVertical="top"
-        style={{ borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, height: 160 }}
+        style={styles.commentsInput}
         numberOfLines={20}
         placeholder="Write a comment..."
       />
@@ -274,4 +274,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 5,
   },
+  commentsInput: { borderWidth: 1, borderColor: "#d1d1db", padding: 10, borderRadius: 5, height: 160 },
 });
