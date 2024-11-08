@@ -212,7 +212,7 @@ function Rating({ rating }: { rating: number }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 80,
+    paddingTop: 60,
     backgroundColor: "#f4f4f6",
     paddingHorizontal: 10,
   },
