@@ -143,6 +143,14 @@ function FilterHeader({
     return Array.from(categories);
   }, [places]);
 
+  function selectCategory(tag: string) {
+    if (selectedCategories.includes(tag)) {
+      setSelectedCategories((tags) => tags.filter((t) => t !== tag));
+    } else {
+      setSelectedCategories((tags) => [...tags, tag]);
+    }
+  }
+
   return (
     <View style={{ backgroundColor: "transparent" }}>
       <View style={{ flexDirection: "row", paddingBottom: 10, backgroundColor: "transparent", gap: 10 }}>
@@ -168,17 +176,7 @@ function FilterHeader({
       <Text style={{ fontWeight: "bold", fontSize: 16, marginBottom: 10 }}>Filter by Tags:</Text>
       <View style={styles.categoriesContainer}>
         {allCategories.map((tag) => (
-          <FilterCategory
-            onPress={() => {
-              if (selectedCategories.includes(tag)) {
-                setSelectedCategories((tags) => tags.filter((t) => t !== tag));
-              } else {
-                setSelectedCategories((tags) => [...tags, tag]);
-              }
-            }}
-            tag={tag}
-            selected={selectedCategories.includes(tag)}
-          />
+          <FilterCategory onPress={() => selectCategory(tag)} tag={tag} selected={selectedCategories.includes(tag)} />
         ))}
       </View>
     </View>
