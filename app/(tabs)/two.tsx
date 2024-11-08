@@ -168,8 +168,7 @@ function FilterHeader({
       <Text style={{ fontWeight: "bold", fontSize: 16, marginBottom: 10 }}>Filter by Tags:</Text>
       <View style={styles.categoriesContainer}>
         {allCategories.map((tag) => (
-          <Pressable
-            key={tag}
+          <FilterCategory
             onPress={() => {
               if (selectedCategories.includes(tag)) {
                 setSelectedCategories((tags) => tags.filter((t) => t !== tag));
@@ -177,13 +176,24 @@ function FilterHeader({
                 setSelectedCategories((tags) => [...tags, tag]);
               }
             }}
-            style={[styles.filterButton, { backgroundColor: selectedCategories.includes(tag) ? "#22c55e" : "white" }]}
-          >
-            <Text style={{ fontSize: 14, color: selectedCategories.includes(tag) ? "white" : "black" }}>{tag}</Text>
-          </Pressable>
+            tag={tag}
+            selected={selectedCategories.includes(tag)}
+          />
         ))}
       </View>
     </View>
+  );
+}
+
+function FilterCategory({ tag, selected, onPress }: { tag: string; selected: boolean; onPress: () => void }) {
+  return (
+    <Pressable
+      key={tag}
+      onPress={onPress}
+      style={[styles.filterButton, { backgroundColor: selected ? "#22c55e" : "white" }]}
+    >
+      <Text style={{ fontSize: 14, color: selected ? "white" : "black" }}>{tag}</Text>
+    </Pressable>
   );
 }
 
