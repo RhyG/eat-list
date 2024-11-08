@@ -176,7 +176,12 @@ function FilterHeader({
       <Text style={{ fontWeight: "bold", fontSize: 16, marginBottom: 10 }}>Filter by Tags:</Text>
       <View style={styles.categoriesContainer}>
         {allCategories.map((tag) => (
-          <FilterCategory onPress={() => selectCategory(tag)} tag={tag} selected={selectedCategories.includes(tag)} />
+          <FilterCategory
+            key={tag}
+            onPress={() => selectCategory(tag)}
+            tag={tag}
+            selected={selectedCategories.includes(tag)}
+          />
         ))}
       </View>
     </View>
